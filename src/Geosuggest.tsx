@@ -463,7 +463,7 @@ export default class extends React.Component<IProps, IState> {
     let suggest: ISuggest = suggestToSelect || {
       isFixture: false,
       label: this.state.userInput,
-      placeId: this.state.userInput
+      placeId: '' // Do not set default `placeId` on no auto suggest
     };
 
     if (
@@ -559,6 +559,8 @@ export default class extends React.Component<IProps, IState> {
             }
           };
 
+          // Update the token even if nothing is found for places service
+          this.sessionToken = new google.maps.places.AutocompleteSessionToken();
           if (this.props.onSuggestSelect) {
             this.props.onSuggestSelect(suggest);
           }
